@@ -15,6 +15,11 @@ import {PAGINATION_SIZE} from '~/lib/const';
 import type {Collection} from '@shopify/hydrogen/storefront-api-types';
 import {Suspense} from 'react';
 
+import {BuilderComponent} from '~/components/BuilderComponent.client';
+import {builder} from '@builder.io/react';
+
+builder.init('245aa4e16ae5481e97faa1daaacaa55d');
+
 export default function Search({
   pageBy = PAGINATION_SIZE,
   params,
@@ -64,6 +69,10 @@ export default function Search({
       </SearchPage>
     );
   }
+
+  return (
+    <BuilderComponent model="announcement-bar" content={announce} />
+  );
 
   return (
     <SearchPage searchTerm={decodeURI(searchTerm)}>
