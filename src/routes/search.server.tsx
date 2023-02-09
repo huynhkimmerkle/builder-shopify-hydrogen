@@ -18,7 +18,7 @@ import {Suspense} from 'react';
 import {BuilderComponent} from '~/components/BuilderComponent.client';
 import {builder} from '@builder.io/react';
 
-builder.init('245aa4e16ae5481e97faa1daaacaa55d');
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 export default function Search({
   pageBy = PAGINATION_SIZE,
@@ -69,6 +69,11 @@ export default function Search({
       </SearchPage>
     );
   }
+
+  const urlPath = '/' + (params?.page?.join('/') || '');
+  const announce = builder
+    .get('announcement-bar', { userAttributes: { urlPath } })
+    .toPromise();
 
   return (
     <BuilderComponent model="announcement-bar" content={announce} />
