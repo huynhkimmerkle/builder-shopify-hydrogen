@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="56925c55-4f80-4db4-a939-a06667d1e9a3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/BuilderComponent.client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BuilderComponent.client.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/builder/[handle].server.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/builder/[handle].server.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/components/BuilderComponent.client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/components/BuilderComponent.client.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hydrogen.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hydrogen.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/collections/index.server.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/collections/index.server.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,13 +31,32 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/var/www/shopify/builder-shopify-hydrogen/src/routes/pages"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/var/www/shopify/builder-shopify-hydrogen/src/routes/collections",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes/collections" />
+      <recent name="$PROJECT_DIR$/src/routes" />
       <recent name="$PROJECT_DIR$/src/routes/pages" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="builder-shopify-hydrogen" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="builder-shopify-hydrogen" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,5 +68,8 @@
       <updated>1675827978951</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.tsx" />
   </component>
 </project>

@@ -6,9 +6,27 @@ import {PageHeader, Section, Grid} from '~/components';
 import {Layout, CollectionCard} from '~/components/index.server';
 import {getImageLoadingPriority, PAGINATION_SIZE} from '~/lib/const';
 
-export default function Collections() {
+import {BuilderComponent} from '~/components/BuilderComponent.client';
+import {builder} from '@builder.io/react';
+import {useQuery} from '@shopify/hydrogen';
+
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
+
+const MODEL_NAME = 'product-hero';
+
+export default function Collections({ params }) {
+
+    const hero = useQuery([MODEL_NAME], async () => {
+        return await builder
+            .get(MODEL_NAME, {
+              entry: '2c872f07f1c5432e9ef8116c8e95f11d'
+            })
+            .promise();
+      });
+
   return (
     <Layout>
+      <BuilderComponent model="product-hero" content={hero.data} />
       <Seo type="page" data={{title: 'All Collections'}} />
       <PageHeader heading="Collections" />
       <Section>
