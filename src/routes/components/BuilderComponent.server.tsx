@@ -4,7 +4,7 @@ import { flattenConnection, gql, useShopQuery } from '@shopify/hydrogen';
 import { Product } from '@shopify/hydrogen/storefront-api-types';
 import { ProductCard, ProductByCollection } from '~/components';
 import { getImageLoadingPriority } from '~/lib/const';
-builder.init('5392aabdddfe455c892d9897f30391a0');
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 // Add custom components
 //

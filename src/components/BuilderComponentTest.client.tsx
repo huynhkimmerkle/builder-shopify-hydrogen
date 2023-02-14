@@ -5,7 +5,7 @@ import { Product } from '@shopify/hydrogen/storefront-api-types';
 
 
 
-builder.init('5392aabdddfe455c892d9897f30391a0');
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 const ProductByCollection = ({ handle }) => {
   const products: Product[] = fetchSync('/api/productByCollectionHandle?handle='+handle).json();
