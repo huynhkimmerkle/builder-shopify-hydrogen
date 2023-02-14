@@ -22,6 +22,14 @@ import {
   Text,
 } from '~/components';
 
+import {BuilderComponent} from '~/components/BuilderComponent.client';
+import {builder} from '@builder.io/react';
+import {useQuery} from '@shopify/hydrogen';
+
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
+
+const MODEL_NAME = 'product-hero';
+
 export default function Product() {
   const {handle} = useRouteParams();
   const {
@@ -55,8 +63,17 @@ export default function Product() {
   const {media, title, vendor, descriptionHtml, id} = product;
   const {shippingPolicy, refundPolicy} = shop;
 
+  const hero = useQuery([MODEL_NAME], async () => {
+    return await builder
+      .get(MODEL_NAME, {
+        entry: '2c872f07f1c5432e9ef8116c8e95f11d'
+      })
+      .promise();
+  });
+
   return (
     <Layout>
+      <BuilderComponent model={MODEL_NAME} content={hero.data} />
       <Suspense>
         <Seo type="product" data={product} />
       </Suspense>

@@ -14,19 +14,19 @@ builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 const MODEL_NAME = 'product-hero';
 
-export default function Collections({ params }) {
+export default function Collections() {
 
     const hero = useQuery([MODEL_NAME], async () => {
-        return await builder
-            .get(MODEL_NAME, {
-              entry: '2c872f07f1c5432e9ef8116c8e95f11d'
-            })
-            .promise();
-      });
+      return await builder
+        .get(MODEL_NAME, {
+          entry: '2c872f07f1c5432e9ef8116c8e95f11d'
+        })
+        .promise();
+    });
 
   return (
     <Layout>
-      <BuilderComponent model="product-hero" content={hero.data} />
+      <BuilderComponent model={MODEL_NAME} content={hero.data} />
       <Seo type="page" data={{title: 'All Collections'}} />
       <PageHeader heading="Collections" />
       <Section>
