@@ -6,6 +6,7 @@ import {BuilderComponent} from '~/components/BuilderComponent.client';
 
 import {useQuery} from '@shopify/hydrogen';
 import {builder} from '@builder.io/react';
+import ShopifyCollection from '../components/BuilderComponent.server';
 
 builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
@@ -33,9 +34,9 @@ export default function Page(props: any) {
       ) : (
         <Layout>
           <Suspense></Suspense>
-          <PageHeader heading={content?.data?.data?.title}>
+          <PageHeader heading={content?.data?.data?.title}>          </PageHeader>
             <BuilderComponent model={MODEL_NAME} content={content?.data} />
-          </PageHeader>
+          <ShopifyCollection />
         </Layout>
       )}
     </div>
