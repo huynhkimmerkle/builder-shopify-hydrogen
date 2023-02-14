@@ -1,7 +1,7 @@
 import {builder, BuilderComponent, Builder} from '@builder.io/react';
 import "@builder.io/widgets";
 
-builder.init('5392aabdddfe455c892d9897f30391a0');
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 const ProductShopify = ({ product }) => {
   return (
