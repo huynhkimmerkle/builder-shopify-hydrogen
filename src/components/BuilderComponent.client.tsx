@@ -1,39 +1,35 @@
-import {builder, BuilderComponent, Builder} from '@builder.io/react';
+import {Builder, builder, BuilderComponent} from '@builder.io/react';
 import "@builder.io/widgets";
+import { fetchSync } from '@shopify/hydrogen';
+import { Product } from '@shopify/hydrogen/storefront-api-types';
+import { Grid, ProductCard} from '~/components';
+import { getImageLoadingPriority } from '~/lib/const';
 
 builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
-const ProductShopify = ({ product }) => {
+const ProductByCollection = ({ handle }) => {
+  const products: Product[] = fetchSync('/api/productByCollectionHandle?handle='+handle).json();
+  console.log(products);
   return (
-    <div>
-      <h1>
-        this is a product handle: "<strong>{product}</strong>"
-        need to find a way to use this handle
-      </h1>
-    </div>
+    <Grid layout="products">
+    {products.map((product, i) => (
+      <ProductCard
+        key={product.id}
+        product={product}
+        loading={getImageLoadingPriority(i)}
+      />
+    ))}
+    </Grid>
   );
 }
-Builder.registerComponent(ProductShopify, {
-  name: 'ProductShopify',
+Builder.registerComponent(ProductByCollection, {
+  name: 'ProductByCollection',
   inputs: [
     {
-      name: 'product',
-      type: 'ShopifyProductHandle',
+      name: 'handle',
+      type: 'ShopifyCollectionHandle',
     },
   ],
 });
 
-
-const Heading = props => (
-  <h1 className="my-heading">{props.title}</h1>
-)
-
-Builder.registerComponent(Heading,
-  {
-    name: 'Heading',
-    inputs: [{ name: 'title', type: 'text' }],
-    image: 'https://tabler-icons.io/static/tabler-icons/icons-png/3d-cube-sphere-off.png'
-  }
-)
-
-export { BuilderComponent };
+export { ProductByCollection,BuilderComponent };

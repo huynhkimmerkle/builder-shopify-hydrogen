@@ -80,4 +80,6 @@ jspm_packages/
 # Vite output
 dist
 
+.idea
+./hydrogen.config.ts
 hydrogen.config.ts

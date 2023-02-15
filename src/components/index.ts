@@ -8,4 +8,4 @@ export * from './sections/index';
 export {CountrySelector} from './CountrySelector.client';
 export {CustomFont} from './CustomFont.client';
 export {HeaderFallback} from './HeaderFallback';
-export {ProductByCollection} from './BuilderComponentTest.client';
+export {ProductByCollection} from './BuilderComponent.client';
