@@ -81,5 +81,7 @@ jspm_packages/
 dist
 
 .idea
+.idea/*
+.idea/workspace.xml
 ./hydrogen.config.ts
 hydrogen.config.ts
