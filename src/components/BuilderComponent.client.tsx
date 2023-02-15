@@ -8,7 +8,7 @@ import { getImageLoadingPriority } from '~/lib/const';
 builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 const ProductByCollection = ({ handle }) => {
-  const products: Product[] = fetchSync('/api/productByCollectionHandle?handle='+handle).json();
+  const products: Product[] = fetchSync('http://localhost:3000/api/productByCollectionHandle?handle='+handle).json();
   console.log(products);
   return (
     <Grid layout="products">
