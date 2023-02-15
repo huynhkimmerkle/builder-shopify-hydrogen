@@ -63,7 +63,7 @@ export default function Product() {
   const {media, title, vendor, descriptionHtml, id} = product;
   const {shippingPolicy, refundPolicy} = shop;
 
-  const hero = useQuery([MODEL_NAME], async () => {
+  const featuredProduct = useQuery([MODEL_NAME], async () => {
     return await builder
       .get(MODEL_NAME, {
         entry: '2c872f07f1c5432e9ef8116c8e95f11d'
@@ -73,7 +73,6 @@ export default function Product() {
 
   return (
     <Layout>
-      <BuilderComponent model={MODEL_NAME} content={hero.data} />
       <Suspense>
         <Seo type="product" data={product} />
       </Suspense>
@@ -124,6 +123,8 @@ export default function Product() {
         <Suspense>
           <ProductSwimlane title="Related Products" data={id} />
         </Suspense>
+        <h2 className="font-bold">Featured Products</h2>
+        <BuilderComponent model={MODEL_NAME} content={featuredProduct.data} />
       </ProductOptionsProvider>
     </Layout>
   );

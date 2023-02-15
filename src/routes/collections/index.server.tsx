@@ -26,7 +26,7 @@ export default function Collections() {
 
   return (
     <Layout>
-      <BuilderComponent model={MODEL_NAME} content={hero.data} />
+{/*       <BuilderComponent model={MODEL_NAME} content={hero.data} /> */}
       <Seo type="page" data={{title: 'All Collections'}} />
       <PageHeader heading="Collections" />
       <Section>

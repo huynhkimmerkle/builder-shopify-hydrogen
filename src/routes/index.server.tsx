@@ -1,172 +1,80 @@
 import {Suspense} from 'react';
-import {
-  CacheLong,
-  gql,
-  Seo,
-  ShopifyAnalyticsConstants,
-  useServerAnalytics,
-  useLocalization,
-  useShopQuery,
-} from '@shopify/hydrogen';
 
-import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
-import {getHeroPlaceholder} from '~/lib/placeholders';
-import {FeaturedCollections, Hero} from '~/components';
-import {Layout, ProductSwimlane} from '~/components/index.server';
-import {
-  CollectionConnection,
-  ProductConnection,
-} from '@shopify/hydrogen/storefront-api-types';
+import {PageHeader} from '~/components';
+import {NotFound, Layout} from '~/components/index.server';
+import {BuilderComponent} from '~/components/BuilderComponent.client';
 
-export default function Homepage() {
-  useServerAnalytics({
-    shopify: {
-      pageType: ShopifyAnalyticsConstants.pageType.home,
-    },
-  });
+import {CacheLong, gql, Seo, useQuery, useShopQuery} from '@shopify/hydrogen';
+import {builder} from '@builder.io/react';
 
-  return (
-    <Layout>
-      <Suspense>
-        <SeoForHomepage />
-      </Suspense>
-      <Suspense>
-        <HomepageContent />
-      </Suspense>
-    </Layout>
-  );
+builder.init('3636687a3f434e1fb3bf09ca71639c49');
+
+const MODEL_NAME = 'page';
+
+export default function Homepage(props: any) {
+    console.log('Homepage builder', props.pathname);
+    const content = useQuery([MODEL_NAME, '/'], async () => {
+      return await builder
+        .get(MODEL_NAME, {
+          userAttributes: {
+            urlPath: props.pathname,
+          },
+        })
+        .promise();
+    });
+
+    const featuredProduct = useQuery(['product-hero'], async () => {
+      return await builder
+        .get('product-hero', {
+          entry: '2c872f07f1c5432e9ef8116c8e95f11d'
+        })
+        .promise();
+    });
+
+    const params = new URLSearchParams(props.search);
+    const isPreviewing = params.has('builder.preview');
+    //console.log('get content builder homepage', JSON.stringify(content));
+
+    return (
+        <div>
+            {!content.data && !isPreviewing ? (
+                <NotFound></NotFound>
+            ) : (
+                <Layout>
+                    <Suspense>
+                        <SeoForHomepage />
+                    </Suspense>
+                    <Suspense>
+                        <BuilderComponent model={MODEL_NAME} content={content?.data} />
+                        <BuilderComponent model='product-hero' content={featuredProduct.data} />
+                    </Suspense>
+                </Layout>
+            )}
+        </div>
+    );
 }
-
-function HomepageContent() {
-  const {
-    language: {isoCode: languageCode},
-    country: {isoCode: countryCode},
-  } = useLocalization();
-
-  const {data} = useShopQuery<{
-    heroBanners: CollectionConnection;
-    featuredCollections: CollectionConnection;
-    featuredProducts: ProductConnection;
-  }>({
-    query: HOMEPAGE_CONTENT_QUERY,
-    variables: {
-      language: languageCode,
-      country: countryCode,
-    },
-    preload: true,
-  });
-
-  const {heroBanners, featuredCollections, featuredProducts} = data;
-
-  // fill in the hero banners with placeholders if they're missing
-  const [primaryHero, secondaryHero, tertiaryHero] = getHeroPlaceholder(
-    heroBanners.nodes,
-  );
-
-  return (
-    <>
-      {primaryHero && (
-        <Hero {...primaryHero} height="full" top loading="eager" />
-      )}
-      <ProductSwimlane
-        data={featuredProducts.nodes}
-        title="Featured Products"
-        divider="bottom"
-      />
-      {secondaryHero && <Hero {...secondaryHero} />}
-      <FeaturedCollections
-        data={featuredCollections.nodes}
-        title="Collections"
-      />
-      {tertiaryHero && <Hero {...tertiaryHero} />}
-    </>
-  );
-}
-
 function SeoForHomepage() {
-  const {
-    data: {
-      shop: {title, description},
-    },
-  } = useShopQuery({
-    query: HOMEPAGE_SEO_QUERY,
-    cache: CacheLong(),
-    preload: true,
-  });
+    const {
+        data: {
+            shop: {title, description},
+        },
+    } = useShopQuery({
+        query: HOMEPAGE_SEO_QUERY,
+        cache: CacheLong(),
+        preload: true,
+    });
 
-  return (
-    <Seo
-      type="homepage"
-      data={{
-        title,
-        description,
-        titleTemplate: '%s · Powered by Hydrogen',
-      }}
-    />
-  );
+    return (
+        <Seo
+            type="homepage"
+            data={{
+                title,
+                description,
+                titleTemplate: '%s · Powered by Hydrogen',
+            }}
+        />
+    );
 }
-
-const HOMEPAGE_CONTENT_QUERY = gql`
-  ${MEDIA_FRAGMENT}
-  ${PRODUCT_CARD_FRAGMENT}
-  query homepage($country: CountryCode, $language: LanguageCode)
-  @inContext(country: $country, language: $language) {
-    heroBanners: collections(
-      first: 3
-      query: "collection_type:custom"
-      sortKey: UPDATED_AT
-    ) {
-      nodes {
-        id
-        handle
-        title
-        descriptionHtml
-        heading: metafield(namespace: "hero", key: "title") {
-          value
-        }
-        byline: metafield(namespace: "hero", key: "byline") {
-          value
-        }
-        cta: metafield(namespace: "hero", key: "cta") {
-          value
-        }
-        spread: metafield(namespace: "hero", key: "spread") {
-          reference {
-            ...Media
-          }
-        }
-        spreadSecondary: metafield(namespace: "hero", key: "spread_secondary") {
-          reference {
-            ...Media
-          }
-        }
-      }
-    }
-    featuredCollections: collections(
-      first: 3
-      query: "collection_type:smart"
-      sortKey: UPDATED_AT
-    ) {
-      nodes {
-        id
-        title
-        handle
-        image {
-          altText
-          width
-          height
-          url
-        }
-      }
-    }
-    featuredProducts: products(first: 12) {
-      nodes {
-        ...ProductCard
-      }
-    }
-  }
-`;
-
 const HOMEPAGE_SEO_QUERY = gql`
   query homeShopInfo {
     shop {

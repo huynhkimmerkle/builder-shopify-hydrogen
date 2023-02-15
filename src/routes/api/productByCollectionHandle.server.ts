@@ -7,18 +7,18 @@ export async function api(
   request: HydrogenRequest,
   {queryShop}: HydrogenApiRouteOptions,
 ) {
- const url = new URL(request.url);
- const handle = url.searchParams.get('handle');
+  const url = new URL(request.url);
+  const handle = url.searchParams.get('handle');
+
   const {
     data: {collection},
   } = await queryShop<{
     collection: CollectionConnection;
-    
   }>({
     query: QUERY,
     variables: {
         handle,
-        pageBy: 10
+        pageBy: 8
     },
   });
 
@@ -33,51 +33,51 @@ const QUERY = gql`
     $handle: String!
     $pageBy: Int
     ) {
-        collection(handle: $handle) {
+    collection(handle: $handle) {
+      id
+      title
+      description
+      seo {
+        description
+        title
+      }
+      image {
+        id
+        url
+        width
+        height
+        altText
+      }
+      products(first: $pageBy) {
+        edges {
+          cursor
+          node {
             id
             title
-            description
-            seo {
-              description
-              title
-            }
-            image {
-              id
-              url
-              width
-              height
-              altText
-            }
-            products(first: $pageBy) {
-                edges {
-                  cursor
-                  node {
-                    id
-                    title
-                    publishedAt
-                    handle
-                    variants(first: 1) {
-                      nodes {
-                        id
-                        image {
-                          url
-                          altText
-                          width
-                          height
-                        }
-                        priceV2 {
-                          amount
-                          currencyCode
-                        }
-                        compareAtPriceV2 {
-                          amount
-                          currencyCode
-                        }
-                      }
-                    }
-                  }
+            publishedAt
+            handle
+            variants(first: 1) {
+              nodes {
+                id
+                image {
+                  url
+                  altText
+                  width
+                  height
+                }
+                priceV2 {
+                  amount
+                  currencyCode
+                }
+                compareAtPriceV2 {
+                  amount
+                  currencyCode
                 }
               }
+            }
           }
+        }
+      }
+    }
 }`;
 
