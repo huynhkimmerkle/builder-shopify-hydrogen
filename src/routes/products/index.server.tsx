@@ -34,7 +34,7 @@ export default function AllProducts() {
 
   return (
     <Layout>
-      <BuilderComponent model={MODEL_NAME} content={hero.data} />
+{/*       <BuilderComponent model={MODEL_NAME} content={hero.data} /> */}
       <Seo type="page" data={{title: 'All Products'}} />
       <PageHeader heading="All Products" variant="allCollections" />
       <Section>
