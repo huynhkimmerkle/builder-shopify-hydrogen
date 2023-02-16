@@ -32,4 +32,41 @@ Builder.registerComponent(ProductByCollection, {
   ],
 });
 
+const BestSellers = ({ handle }) => {
+  const products: Product[] = fetchSync('/api/bestSellers').json();
+  console.log(products);
+  return (
+    <section>
+      <h2><strong>Best Sellers</strong></h2>
+      <Grid layout="products">
+      {products.map((product, i) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          loading={getImageLoadingPriority(i)}
+        />
+      ))}
+      </Grid>
+    </section>
+  );
+}
+Builder.registerComponent(BestSellers, {
+  name: 'BestSellers'
+});
+
+const CollectionList = () => {
+  const collections: Collection[] = fetchSync('/api/collectionListHandle').json();
+  console.log(collections, 'abc');
+  return (
+    <Grid items={collections.length === 3 ? 3 : 2}>
+      {collections.map((collection, i) => (
+        <div>{collection}</div>
+      ))}
+    </Grid>
+  );
+}
+Builder.registerComponent(CollectionList, {
+  name: 'CollectionList'
+});
+
 export { ProductByCollection,BuilderComponent };

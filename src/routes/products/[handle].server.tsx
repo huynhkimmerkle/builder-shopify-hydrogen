@@ -123,7 +123,6 @@ export default function Product() {
         <Suspense>
           <ProductSwimlane title="Related Products" data={id} />
         </Suspense>
-        <h2 className="font-bold">Featured Products</h2>
         <BuilderComponent model={MODEL_NAME} content={featuredProduct.data} />
       </ProductOptionsProvider>
     </Layout>
