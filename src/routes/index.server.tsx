@@ -23,10 +23,10 @@ export default function Homepage(props: any) {
         .promise();
     });
 
-    const featuredProduct = useQuery(['product-hero'], async () => {
+    const featuredProduct = useQuery(['featured-products'], async () => {
       return await builder
-        .get('product-hero', {
-          entry: '2c872f07f1c5432e9ef8116c8e95f11d'
+        .get('featured-products', {
+          entry: 'ba7028a458ab4602996ebe0aaebda760'
         })
         .promise();
     });
@@ -46,7 +46,7 @@ export default function Homepage(props: any) {
                     </Suspense>
                     <Suspense>
                         <BuilderComponent model={MODEL_NAME} content={content?.data} />
-                        <BuilderComponent model='product-hero' content={featuredProduct.data} />
+                        <BuilderComponent model='featured-products' content={featuredProduct.data} />
                     </Suspense>
                 </Layout>
             )}

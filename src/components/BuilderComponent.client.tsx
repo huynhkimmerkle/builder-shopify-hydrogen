@@ -8,7 +8,7 @@ import { getImageLoadingPriority } from '~/lib/const';
 builder.init('3636687a3f434e1fb3bf09ca71639c49');
 
 const ProductByCollection = ({ handle }) => {
-  const products: Product[] = fetchSync('/api/productByCollectionHandle?handle='+handle).json();
+  const products: Product[] = fetchSync('/api/productByCollectionHandle?handle=' + handle).json();
   console.log(products);
   return (
     <Grid layout="products">
@@ -23,7 +23,7 @@ const ProductByCollection = ({ handle }) => {
   );
 }
 Builder.registerComponent(ProductByCollection, {
-  name: 'ProductByCollection',
+  name: 'ProductListByCollection',
   inputs: [
     {
       name: 'handle',
@@ -55,7 +55,7 @@ Builder.registerComponent(BestSellers, {
 });
 
 const CollectionList = () => {
-  const collections: Collection[] = fetchSync('/api/collectionListHandle').json();
+  const collections: Collection[] = fetchSync('/api/collectionList').json();
   console.log(collections, 'log in component collection list');
   return (
     <section>
