@@ -1,7 +1,7 @@
 import {builder, Builder, BuilderComponent} from '@builder.io/react';
 import "@builder.io/widgets";
 import { fetchSync } from '@shopify/hydrogen';
-import { Product } from '@shopify/hydrogen/storefront-api-types';
+import { Product, Collection } from '@shopify/hydrogen/storefront-api-types';
 import { Grid, ProductCard, CollectionCard} from '~/components';
 import { getImageLoadingPriority } from '~/lib/const';
 
