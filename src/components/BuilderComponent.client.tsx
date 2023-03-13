@@ -5,7 +5,7 @@ import { Product, Collection } from '@shopify/hydrogen/storefront-api-types';
 import { Grid, ProductCard, CollectionCard} from '~/components';
 import { getImageLoadingPriority } from '~/lib/const';
 
-builder.init('3636687a3f434e1fb3bf09ca71639c49');
+builder.init('ab7093ff986049da9a110f39ac9cd5ec');
 
 const ProductByCollection = ({ handle }) => {
   const products: Product[] = fetchSync('/api/productByCollectionHandle?handle=' + handle).json();

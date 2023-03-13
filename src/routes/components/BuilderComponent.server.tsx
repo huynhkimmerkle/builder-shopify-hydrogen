@@ -5,7 +5,7 @@ import { Product } from '@shopify/hydrogen/storefront-api-types';
 import { ProductCard, ProductByCollection } from '~/components';
 import { getImageLoadingPriority } from '~/lib/const';
 
-builder.init('3636687a3f434e1fb3bf09ca71639c49');
+builder.init('ab7093ff986049da9a110f39ac9cd5ec');
 
 // Add custom components
 //
